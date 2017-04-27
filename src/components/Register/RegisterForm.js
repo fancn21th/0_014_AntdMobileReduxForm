@@ -1,7 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import InputItemField from '../../antds/InputItemField';
+import { Toast } from 'antd-mobile';
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const validate = values => {
+  const errors = {};
+  if (!values.firstName) {
+    errors.firstName = 'Required';
+  }
+  return errors;
+};
+
+
+const asyncValidate = (values) => {
+  return sleep(1000).then(() => { // simulate server latency
+    if (['john', 'paul', 'george', 'ringo'].includes(values.firstName)) {
+      throw { firstName: 'That firstName is taken' };
+    }
+  });
+};
 
 class RegisterForm extends Component {
+
+  handleErrorClick = (error) => {
+    Toast.info(error)
+  }
+
   render() {
     const { handleSubmit, pristine, reset, submitting } = this.props;
     const style = {
@@ -10,10 +36,16 @@ class RegisterForm extends Component {
       fontSize: '40px',
     };
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={ {width:'80%'} }>
         <div>
           <label htmlFor="firstName">First Name</label>
-          <Field name="firstName" component="input" type="text" style={style} />
+          <Field
+            name="firstName"
+            label="First Name"
+            component={InputItemField}
+            type="text" style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
         </div>
         <div>
           <label htmlFor="lastName">Last Name</label>
@@ -39,6 +71,9 @@ RegisterForm.propTyps = {
 // Decorate the form component
 RegisterForm = reduxForm({
   form: 'register', // a unique name for this form
+  validate,
+  asyncValidate,
+  asyncBlurFields: ['firstName'],
 })(RegisterForm);
 
 export default RegisterForm;
