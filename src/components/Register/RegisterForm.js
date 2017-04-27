@@ -10,16 +10,32 @@ const validate = values => {
   if (!values.firstName) {
     errors.firstName = 'Required';
   }
+  if (!values.lastName) {
+    errors.lastName = 'Required';
+  }
+  if (!values.email) {
+    errors.email = 'Required';
+  }
   return errors;
 };
 
 
-const asyncValidate = (values) => {
-  return sleep(1000).then(() => { // simulate server latency
-    if (['john', 'paul', 'george', 'ringo'].includes(values.firstName)) {
-      throw { firstName: 'That firstName is taken' };
-    }
-  });
+const asyncValidate = (values, dispatch, props, blurredField) => {
+  console.log('asyncValidate');
+  if(blurredField === 'firstName'){
+    return sleep(1000).then(() => { // simulate server latency
+      if (['alex'].includes(values.firstName)) {
+        throw { firstName: 'That firstName is taken' };
+      }
+    });
+  }
+  if(blurredField === 'email'){
+    return sleep(1000).then(() => { // simulate server latency
+      if (['fancn21th@aliyun.com'].includes(values.email)) {
+        throw { email: 'That email is taken' };
+      }
+    });
+  }
 };
 
 class RegisterForm extends Component {
@@ -100,7 +116,7 @@ RegisterForm = reduxForm({
   form: 'register', // a unique name for this form
   validate,
   asyncValidate,
-  asyncBlurFields: ['firstName'],
+  asyncBlurFields: ['firstName', 'email'],
 })(RegisterForm);
 
 export default RegisterForm;
