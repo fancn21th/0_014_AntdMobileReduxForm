@@ -1,9 +1,12 @@
 import 'babel-polyfill';
 import React from 'react';
-import { Button } from 'antd-mobile';
 import { render } from 'react-dom';
+import configureStore from './configureStore';
+import App from './components/App';
+
+const store = configureStore();
 
 render(
-  <div><Button>Hello World!</Button></div>,
-  document.getElementById('example')
+  <App store={store} />,
+  document.getElementById('root')
 );
