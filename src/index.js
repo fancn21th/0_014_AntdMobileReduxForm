@@ -1,8 +1,9 @@
 import 'babel-polyfill';
 import React from 'react';
+import { Button } from 'antd-mobile';
 import { render } from 'react-dom';
 
 render(
-  <div>hello world</div>,
-  document.getElementById('root')
+  <div><Button>Hello World!</Button></div>,
+  document.getElementById('example')
 );
