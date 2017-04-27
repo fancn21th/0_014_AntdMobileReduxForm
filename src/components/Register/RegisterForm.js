@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import InputItemField from '../../antds/InputItemField';
-import { Toast } from 'antd-mobile';
+import { Toast, WhiteSpace, Button } from 'antd-mobile';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -36,29 +36,56 @@ class RegisterForm extends Component {
       fontSize: '40px',
     };
     return (
-      <form onSubmit={handleSubmit} style={ {width:'80%'} }>
+      <form onSubmit={handleSubmit} style={ {width:'90%'} }>
         <div>
-          <label htmlFor="firstName">First Name</label>
           <Field
             name="firstName"
             label="First Name"
             component={InputItemField}
-            type="text" style={style}
+            type="text"
+            style={style}
             handleErrorClick={this.handleErrorClick}
           />
         </div>
+        <WhiteSpace size='md' />
         <div>
-          <label htmlFor="lastName">Last Name</label>
-          <Field name="lastName" component="input" type="text" style={style} />
+          <Field
+            name="lastName"
+            label="Last Name"
+            component={InputItemField}
+            type="text"
+            style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
         </div>
+        <WhiteSpace size='md' />
         <div>
-          <label htmlFor="email">Email</label>
-          <Field name="email" component="input" type="email" style={style} />
+          <Field
+            name="email"
+            label="Email"
+            component={InputItemField}
+            type="text"
+            style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
         </div>
-        <button type="submit" disabled={pristine || submitting} style={style} >Submit</button>
-        <button type="button" disabled={pristine || submitting} onClick={reset} style={style} >
+        <WhiteSpace size='md' />
+        <Button
+          className="btn"
+          type="primary"
+          onClick={handleSubmit}
+          disabled={pristine || submitting}
+        >
+          Submit
+        </Button>
+        <WhiteSpace size='md' />
+        <Button
+          className="btn"
+          onClick={reset}
+          disabled={pristine || submitting}
+        >
           Clear Values
-        </button>
+        </Button>
       </form>
     );
   }
