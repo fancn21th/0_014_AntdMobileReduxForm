@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import InputItemField from '../../antds/InputItemField';
-import { Toast, WhiteSpace, Button } from 'antd-mobile';
+import { Toast, WhiteSpace, Button, WingBlank } from 'antd-mobile';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -21,7 +21,6 @@ const validate = values => {
 
 
 const asyncValidate = (values, dispatch, props, blurredField) => {
-  console.log('asyncValidate');
   if(blurredField === 'firstName'){
     return sleep(1000).then(() => { // simulate server latency
       if (['alex'].includes(values.firstName)) {
@@ -45,63 +44,65 @@ class RegisterForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, reset, submitting, t } = this.props;
     const style = {
       width: '100%',
       height: '50px',
       fontSize: '40px',
     };
     return (
-      <form onSubmit={handleSubmit} style={ {width:'90%'} }>
-        <div>
-          <Field
-            name="firstName"
-            label="First Name"
-            component={InputItemField}
-            type="text"
-            style={style}
-            handleErrorClick={this.handleErrorClick}
-          />
-        </div>
-        <WhiteSpace size='md' />
-        <div>
-          <Field
-            name="lastName"
-            label="Last Name"
-            component={InputItemField}
-            type="text"
-            style={style}
-            handleErrorClick={this.handleErrorClick}
-          />
-        </div>
-        <WhiteSpace size='md' />
-        <div>
-          <Field
-            name="email"
-            label="Email"
-            component={InputItemField}
-            type="text"
-            style={style}
-            handleErrorClick={this.handleErrorClick}
-          />
-        </div>
-        <WhiteSpace size='md' />
-        <Button
-          className="btn"
-          type="primary"
-          onClick={handleSubmit}
-          disabled={pristine || submitting}
-        >
-          Submit
-        </Button>
-        <WhiteSpace size='md' />
-        <Button
-          className="btn"
-          onClick={reset}
-          disabled={pristine || submitting}
-        >
-          Clear Values
-        </Button>
+      <form onSubmit={handleSubmit}>
+        <WingBlank>
+          <div>
+            <Field
+              name="firstName"
+              label={t('common.firstName')}
+              component={InputItemField}
+              type="text"
+              style={style}
+              handleErrorClick={this.handleErrorClick}
+            />
+          </div>
+          <WhiteSpace size='md' />
+          <div>
+            <Field
+              name="lastName"
+              label="Last Name"
+              component={InputItemField}
+              type="text"
+              style={style}
+              handleErrorClick={this.handleErrorClick}
+            />
+          </div>
+          <WhiteSpace size='md' />
+          <div>
+            <Field
+              name="email"
+              label="Email"
+              component={InputItemField}
+              type="text"
+              style={style}
+              handleErrorClick={this.handleErrorClick}
+            />
+          </div>
+          <WhiteSpace size='md' />
+          <Button
+            className="btn"
+            type="primary"
+            onClick={handleSubmit}
+            disabled={pristine || submitting}
+          >
+            Submit
+          </Button>
+          <WhiteSpace size='md' />
+          <Button
+            className="btn"
+            onClick={reset}
+            disabled={pristine || submitting}
+          >
+            Clear Values
+          </Button>
+        </WingBlank>
       </form>
     );
   }

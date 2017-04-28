@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
-import { InputItem } from 'antd-mobile';
-import RegisterForm from './RegisterForm'
+import RegisterForm from './RegisterForm';
 
 class Register extends React.Component {
   submit = (values) => {
@@ -8,10 +7,14 @@ class Register extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
     return (
+    <div>
+      {t('common.firstName')}
       <RegisterForm
         onSubmit={this.submit}
       />
+    </div>
     );
   }
 }
