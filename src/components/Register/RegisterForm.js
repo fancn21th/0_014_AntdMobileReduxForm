@@ -56,7 +56,7 @@ class RegisterForm extends Component {
           <div>
             <Field
               name="firstName"
-              label={t('common.firstName')}
+              label="First Name"
               component={InputItemField}
               type="text"
               style={style}

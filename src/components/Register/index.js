@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import RegisterForm from './RegisterForm';
+import i18n from '../../i18n'
 
 class Register extends React.Component {
   submit = (values) => {
@@ -7,10 +8,9 @@ class Register extends React.Component {
   }
 
   render() {
-    const { t } = this.props;
     return (
     <div>
-      {t('common.firstName')}
+      {i18n.t('firstName')}
       <RegisterForm
         onSubmit={this.submit}
       />
