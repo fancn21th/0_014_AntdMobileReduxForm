@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import RegisterForm from './RegisterForm';
-import i18n from '../../i18n';
-import { translate } from 'react-i18next';
+import { WingBlank } from 'antd-mobile';
 
 class Register extends React.Component {
   submit = (values) => {
@@ -9,14 +8,12 @@ class Register extends React.Component {
   }
 
   render() {
-    const { t } =  this.props;
     return (
-      <div>
-        {t('firstName')}
+      <WingBlank size="md">
         <RegisterForm
           onSubmit={this.submit}
         />
-      </div>
+      </WingBlank>
     );
   }
 }
@@ -24,4 +21,4 @@ class Register extends React.Component {
 Register.propTyps = {
 }
 
-export default translate()(Register);
+export default Register;

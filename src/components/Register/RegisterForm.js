@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import InputItemField from '../../antds/InputItemField';
-import { Toast, WhiteSpace, Button, WingBlank } from 'antd-mobile';
+import { Toast, WhiteSpace, Button } from 'antd-mobile';
+import { translate } from 'react-i18next';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -18,7 +19,6 @@ const validate = values => {
   }
   return errors;
 };
-
 
 const asyncValidate = (values, dispatch, props, blurredField) => {
   if(blurredField === 'firstName'){
@@ -52,57 +52,55 @@ class RegisterForm extends Component {
     };
     return (
       <form onSubmit={handleSubmit}>
-        <WingBlank>
-          <div>
-            <Field
-              name="firstName"
-              label="First Name"
-              component={InputItemField}
-              type="text"
-              style={style}
-              handleErrorClick={this.handleErrorClick}
-            />
-          </div>
-          <WhiteSpace size='md' />
-          <div>
-            <Field
-              name="lastName"
-              label="Last Name"
-              component={InputItemField}
-              type="text"
-              style={style}
-              handleErrorClick={this.handleErrorClick}
-            />
-          </div>
-          <WhiteSpace size='md' />
-          <div>
-            <Field
-              name="email"
-              label="Email"
-              component={InputItemField}
-              type="text"
-              style={style}
-              handleErrorClick={this.handleErrorClick}
-            />
-          </div>
-          <WhiteSpace size='md' />
-          <Button
-            className="btn"
-            type="primary"
-            onClick={handleSubmit}
-            disabled={pristine || submitting}
-          >
-            Submit
-          </Button>
-          <WhiteSpace size='md' />
-          <Button
-            className="btn"
-            onClick={reset}
-            disabled={pristine || submitting}
-          >
-            Clear Values
-          </Button>
-        </WingBlank>
+        <div>
+          <Field
+            name="firstName"
+            label={t('firstName')}
+            component={InputItemField}
+            type="text"
+            style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
+        </div>
+        <WhiteSpace size='md' />
+        <div>
+          <Field
+            name="lastName"
+            label={t('lastName')}
+            component={InputItemField}
+            type="text"
+            style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
+        </div>
+        <WhiteSpace size='md' />
+        <div>
+          <Field
+            name="email"
+            label={t('email')}
+            component={InputItemField}
+            type="text"
+            style={style}
+            handleErrorClick={this.handleErrorClick}
+          />
+        </div>
+        <WhiteSpace size='md' />
+        <Button
+          className="btn"
+          type="primary"
+          onClick={handleSubmit}
+          disabled={pristine || submitting}
+        >
+          Submit
+        </Button>
+        <WhiteSpace size='md' />
+        <Button
+          className="btn"
+          onClick={reset}
+          disabled={pristine || submitting}
+        >
+          Clear Values
+        </Button>
       </form>
     );
   }
@@ -120,4 +118,4 @@ RegisterForm = reduxForm({
   asyncBlurFields: ['firstName', 'email'],
 })(RegisterForm);
 
-export default RegisterForm;
+export default translate()(RegisterForm);
