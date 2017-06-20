@@ -10,10 +10,10 @@ const App = ({ store }) => (
       <Register />
     </div>
   </Provider>
-)
+);
 
 App.propTyps = {
   store: PropTypes.object.isRequired,
-}
+};
 
 export default App;

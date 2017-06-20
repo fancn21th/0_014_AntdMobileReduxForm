@@ -12,7 +12,7 @@ const configureStore = () => {
   const store = createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(sagaMiddleware))
-  )
+  );
   sagaMiddleware.run(rootSaga);
   return store;
 };

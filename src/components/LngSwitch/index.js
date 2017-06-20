@@ -22,6 +22,6 @@ const LngSwitch = () => {
       <WhiteSpace size="md" />
     </WingBlank>
   );
-}
+};
 
 export default LngSwitch;

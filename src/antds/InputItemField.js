@@ -15,6 +15,6 @@ const InputItemField = ({ input, label, meta: { touched, error }, ...custom, han
       {label}
     </InputItem>
   );
-}
+};
 
 export default InputItemField;
